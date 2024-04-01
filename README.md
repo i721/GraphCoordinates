@@ -1,6 +1,6 @@
 # Graph Coordinates
 
-##Environments
+## Environments
 Implementing environment: NVIDIA A100, 128GB (RAM)
 
 ## Requirements
@@ -12,14 +12,14 @@ pip install -r requirements.txt
 ## Preprocess+Training
 To reproduce our results on OGB products and proteins datasets, please run the following commands.
 
-###For ogbn-products:
+### For ogbn-products:
 For TCNN model: 
 python main.py --config_file config_products_TC.json --random_seed 65
 
 For DVCNN model: 
 python main.py --config_file config_products_DVC.json --random_seed 65
 
-###For ogbn-proteins:
+### For ogbn-proteins:
 For TCNN model: 
 python main.py --config_file config_proteins_TC.json --random_seed 65
 
@@ -37,6 +37,7 @@ xx | xx |xx
 
 ## Citing
 If you find our work useful in your research, please consider citing:
+
 @inproceedings{qin2023graph,
   title={Graph Coordinates and Conventional Neural Networks-An Alternative for Graph Neural Networks},
   author={Qin, Zheyi and Paffenroth, Randy and Jayasumana, Anura P},
