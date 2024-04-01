@@ -11,10 +11,11 @@ import os
 # accept random seed from command line
 parser = argparse.ArgumentParser(description='Process some integers.')
 parser.add_argument('--random_seed', type=int, help='An integer for setting the random seed.')
+parser.add_argument('--config_file', type=str, help='An str for setting the config file.', default='config.json')
 args = parser.parse_args()
 
 # Load the configuration from a JSON file
-with open("config.json", "r") as json_file:
+with open(args.config_file, "r") as json_file:
     config = json.load(json_file)
 
 # Dynamically create variables in the global namespace
