@@ -51,7 +51,8 @@ Performance and number of parameters on ogbn-products:
 
 Performance and number of parameters on ogbn-proteins:
 
-|Method | Valid Accuracy | Test Accuracy|
+| Method | Valid Accuracy | Test Accuracy |
+|---|---|---|
 |xx | xx |xx|
 
 ## Citing
