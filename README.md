@@ -27,15 +27,17 @@ For DVCNN model:
 python main.py --config_file config_proteins_DVC.json --random_seed 65
 
 ## Node Classification Results:
+
 Performance and number of parameters on ogbn-products:
-Method | Valid Accuracy | Test Accuracy
-xx | xx |xx
+|Method | Valid Accuracy | Test Accuracy|
+|xx | xx |xx|
 
 Performance and number of parameters on ogbn-proteins:
-Method | Valid Accuracy | Test Accuracy
-xx | xx |xx
+|Method | Valid Accuracy | Test Accuracy|
+|xx | xx |xx|
 
 ## Citing
+
 If you find our work useful in your research, please consider citing:
 
 @inproceedings{qin2023graph,
