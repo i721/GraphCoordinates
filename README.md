@@ -45,8 +45,9 @@ python main.py --config_file config_proteins_DVC.json --random_seed 65
 
 Performance and number of parameters on ogbn-products:
 
-|Method | Valid Accuracy | Test Accuracy|
-|xx | xx |xx|
+| Method | Valid Accuracy | Test Accuracy|
+|---|---|---|
+| xx | xx | xx |
 
 Performance and number of parameters on ogbn-proteins:
 
