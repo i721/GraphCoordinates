@@ -23,12 +23,14 @@ for key, value in config.items():
 # Dynamically create variables in the global namespace
 for key, value in config.items():
     globals()[key] = value
-    
+shareDataFolder = f'shareData_{datasetName}'
+create_folder(shareDataFolder)
 test_results_avg = {}
 test_results = {}
 valid_results = {}
 valid_results_avg = {}
 for random_seed in range(10):
+    remove_files_in_folder(shareDataFolder)
     saveLog(f"Random seed: {random_seed}")
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     saveFolder = f'GCNN_{datasetName}_{timestamp}'
@@ -44,8 +46,7 @@ for random_seed in range(10):
         torch.cuda.manual_seed(random_seed)
         torch.cuda.manual_seed_all(random_seed)  # For multi-GPU setups.
 
-    shareDataFolder = f'shareData_{datasetName}'
-    create_folder(shareDataFolder)
+    
 
 
 
@@ -81,6 +82,7 @@ for random_seed in range(10):
     log_num_anchors(anchor_indices_list)
 
     nodeFeatM = load_node_features(datasetName, data, G, shareDataFolder)
+    del G
 
     D_list = create_distance_matrices(datasetName, data, shareDataFolder, anchor_indices_list)
 
@@ -203,6 +205,8 @@ for random_seed in range(10):
             #if h_dim is not a key in test_results
             if not tuple(h_dim) in test_results.keys():
                 test_results[tuple(h_dim)] = []
+            if not tuple(h_dim) in valid_results.keys():
+                valid_results[tuple(h_dim)] = []
 
             
             model = denseNet(input_dim=x_shape, hidden_dim=h_dim,out_dim=y_shape,datasetName=datasetName).to(device)
@@ -232,8 +236,8 @@ for key, value in test_results.items():
     saveLog(f"{key}: {test_results_avg[key]['avg']}±{test_results_avg[key]['std']}")
 for key, value in valid_results.items():
     valid_results_avg[key] = {}
-    valid_results_avg[key]['avg'] = np.mean(valid_results[key])
-    valid_results_avg[key]['std'] = np.std(valid_results[key])
+    valid_results_avg[key]['avg'] = np.mean(value)
+    valid_results_avg[key]['std'] = np.std(value)
     saveLog(f"{key}: {valid_results_avg[key]['avg']}±{valid_results_avg[key]['std']}")
 
         

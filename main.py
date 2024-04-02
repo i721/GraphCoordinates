@@ -173,7 +173,7 @@ for X_file in X_file_List:
         CustomNormalize(mean, stddev)
     ])
     
-    del train_dataset, train_loader
+    del train_dataset, train_loader, data
     # create subsets of the data based on the indices
     memoryDataset = MemoryMappedDataset(X_file, label_file, device = device, transform=transform)
     

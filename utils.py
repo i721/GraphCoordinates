@@ -3,12 +3,11 @@ import os
 import networkx as nx
 import torch
 import networkx as nx
-import matplotlib.pyplot as plt
 import numpy as np
 import scipy.sparse as sp
 from ogb.nodeproppred import Evaluator
-import random
 from ogb.nodeproppred import NodePropPredDataset
+import shutil
 
 
 def getFilesInDirectory(directory):
@@ -350,3 +349,15 @@ def save_final_matrix(X, shareDataFolder, GCoption, numPCperGraph, num_anchors, 
     saveLog(f"X shape: {X.shape}")
     torch.save(torch.from_numpy(X), filename)
     return filename
+
+def remove_files_in_folder(directory):
+    for filename in os.listdir(directory):
+        file_path = os.path.join(directory, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+                pass
+        except Exception as e:
+            print(f'Failed to delete {file_path}. Reason: {e}')
