@@ -326,7 +326,7 @@ def perform_gc_transformation(D_list, numPCperGraph, GCoption, shareDataFolder, 
         D = np.load(f'{shareDataFolder}/D_list_edge{D_ith}.npy')
         if GCoption == "TC":
             transformed_matrix = apply_svd(D,numPCperGraph,name,component)
-        elif GCoption == "DVCS":
+        elif GCoption == "DVC":
             transformed_matrix = apply_DVCS(D, numPCperGraph)
         else:
             raise ValueError(f"Unsupported GC option: {GCoption}")
@@ -342,7 +342,7 @@ def concatenate_matrices(list_of_matrices, nodeFeatM):
 
 
 def save_final_matrix(X, shareDataFolder, GCoption, numPCperGraph, num_anchors, timestamp):
-    if GCoption in ["TC", "DVCS"]:
+    if GCoption in ["TC", "DVC"]:
         filename = f'{shareDataFolder}/X_numPCperGraph_{numPCperGraph}_GCoption_{GCoption}_numAnchors_{num_anchors}_Xshape{X.shape[0]}_{X.shape[1]}_timestamp{timestamp}.pt'
     else:
         filename = f'{shareDataFolder}/X.pt'

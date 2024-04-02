@@ -1,13 +1,13 @@
 {
     "num_GCs_List": [
-        100
+        0.99
     ],
-    "hidden_dim": [[],[],[],[],[],[],[],[],[],[],[128,64],[128,64],[128,64],[128,64],[128,64],[128,64],[128,64],[128,64],[128,64],[128,64]],
-    "datasetName": "ogbn-products",
+    "hidden_dim": [[],[128,64]],
+    "datasetName": "ogbn-proteins",
     "directed": false,
-    "num_anchors": 200,
-    "useLargestComponent": true,
-    "GCoption": "DVCS",
+    "num_anchors": 1000,
+    "useLargestComponent": false,
+    "GCoption": "TC",
     "num_epochs": 5000,
     "print_every": 1,
     "batchSize": 1024,

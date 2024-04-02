@@ -1,13 +1,13 @@
 {
     "num_GCs_List": [
-        100
+        0.99
     ],
-    "hidden_dim": [[],[],[],[],[],[],[],[],[],[],[128,64],[128,64],[128,64],[128,64],[128,64],[128,64],[128,64],[128,64],[128,64],[128,64]],
+    "hidden_dim": [[],[128,64]],
     "datasetName": "ogbn-products",
     "directed": false,
-    "num_anchors": 200,
+    "num_anchors": 1000,
     "useLargestComponent": true,
-    "GCoption": "DVCS",
+    "GCoption": "TC",
     "num_epochs": 5000,
     "print_every": 1,
     "batchSize": 1024,
