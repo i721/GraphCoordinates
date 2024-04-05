@@ -221,11 +221,11 @@ for random_seed in range(10):
             #load best model from f"{saveFolder}/best_model.pt"
             model.load_state_dict(torch.load(f"{saveFolder}/best_model.pt"))
             
-            test_resulst = evaluate_model(model, test_loader, evaluator, datasetName, datasetType='test')
+            test_result = evaluate_model(model, test_loader, evaluator, datasetName, datasetType='test')
             valid_result = evaluate_model(model, valid_loader, evaluator, datasetName, datasetType='valid')
-            saveLog(f"Test results: {test_resulst}")
-            saveLog(f"Valid results: {valid_resulst}")
-            test_results[tuple(h_dim)].append(test_resulst)
+            saveLog(f"Test results: {test_result}")
+            saveLog(f"Valid results: {valid_result}")
+            test_results[tuple(h_dim)].append(test_result)
             valid_results[tuple(h_dim)].append(valid_result)
         
         #save test results in a file
