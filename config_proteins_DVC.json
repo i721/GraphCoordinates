@@ -1,11 +1,11 @@
 {
     "num_GCs_List": [
-        100
+        200
     ],
     "hidden_dim": [[],[128,64]],
     "datasetName": "ogbn-proteins",
     "directed": false,
-    "num_anchors": 200,
+    "num_anchors": 400,
     "useLargestComponent": false,
     "GCoption": "DVC",
     "num_epochs": 5000,

@@ -1,8 +1,8 @@
 {
     "num_GCs_List": [
-        0.99
+        10
     ],
-    "hidden_dim": [[],[128,64]],
+    "hidden_dim": [[],[112],[128,64]],
     "datasetName": "ogbn-proteins",
     "directed": false,
     "num_anchors": 1000,

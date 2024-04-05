@@ -1,8 +1,8 @@
 {
     "num_GCs_List": [
-        0.99
+        100
     ],
-    "hidden_dim": [[],[128,64]],
+    "hidden_dim": [[128,64],[256,128],[256,128,64]],
     "datasetName": "ogbn-products",
     "directed": false,
     "num_anchors": 1000,
