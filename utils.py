@@ -142,8 +142,7 @@ def save_filtered_indices(filtered_indices, share_data_folder):
 def load_and_save_split_indices(dataset, shareDataFolder):
     """Load split indices from the dataset and save them."""
     split_idx = dataset.get_idx_split()
-    # Assumes `dataset` is predefined or passed as a parameter correctly
-    del dataset  # Ensure dataset is no longer needed before deleting
+    del dataset
     
     # Save original indices
     torch.save(split_idx["test"], f"{shareDataFolder}/test_idx_original.pt")
@@ -173,9 +172,7 @@ def generate_anchor_indices(component, G, num_anchors, name, data):
     if name == "ogbn-proteins":
         anchor_indices_list = np.random.choice(data[name]['num_nodes'], num_anchors, replace=False)
     elif name == "ogbn-products":
-        #anchor_indices_list = [np.random.choice(component, num_anchors).reshape(-1)]
         anchor_indices_list = np.random.choice(component, num_anchors)
-        #anchor_indices_list = np.array([anchor_indices_list])
     return np.array(anchor_indices_list)
 
 def log_num_anchors(anchor_indices_list):
@@ -245,7 +242,6 @@ def create_distance_matrices(name, data, shareDataFolder, anchorIndicesList):
     return D_list
 
 def process_edge_features_and_calculate_shortest_paths(data, name, edge_feature_index, anchorIndicesList):
-    # Assuming 'data' contains edge indices and edge features under 'name'
     e1, e2 = data[name]['edge_index']
     n = data[name]['num_nodes']
     
@@ -315,8 +311,8 @@ def determine_num_components(singular_values, numPCperGraph, SigmaSum):
     for j, s in enumerate(singular_values):
         sSum += s**2
         if sSum >= numPCperGraph * SigmaSum:
-            return j + 1  # Number of components needed
-    return len(singular_values)  # Fallback to use all components
+            return j + 1
+    return len(singular_values)
 
 
 def perform_gc_transformation(D_list, numPCperGraph, GCoption, shareDataFolder, name="ogbn-products", component=None):

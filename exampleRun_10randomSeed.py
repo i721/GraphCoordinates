@@ -196,7 +196,6 @@ for random_seed in range(10):
         # create DataLoaders for the train, test, and validation sets
 
         train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
-        #test_loader = DataLoader(test_dataset, batch_size=len(test_dataset), shuffle=False)
         test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
         valid_loader = DataLoader(valid_dataset, batch_size=len(valid_dataset), shuffle=False)
         
