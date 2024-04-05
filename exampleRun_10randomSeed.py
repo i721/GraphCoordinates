@@ -10,7 +10,7 @@ import os
 
 # accept random seed from command line
 parser = argparse.ArgumentParser(description='Process some integers.')
-#parser.add_argument('--random_seed', type=int, help='An integer for setting the random seed.')
+parser.add_argument('--random_seed', type=int, help='An integer for setting the random seed.', default=11)
 parser.add_argument('--config_file', type=str, help='An str for setting the config file.', default='config.json')
 args = parser.parse_args()
 
@@ -31,13 +31,16 @@ valid_results = {}
 valid_results_avg = {}
 for random_seed in range(10):
     remove_files_in_folder(shareDataFolder)
-    saveLog(f"Random seed: {random_seed}")
+    
+    if args.random_seed != 11:
+        random_seed = args.random_seed
+    
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     saveFolder = f'GCNN_{datasetName}_{timestamp}'
     os.environ['SAVE_FOLDER'] = saveFolder
     create_folder(saveFolder)
     saveLog(timestamp)
-
+    saveLog(f"Random seed: {random_seed}")
 
     random.seed(random_seed)
     np.random.seed(random_seed)
@@ -221,11 +224,15 @@ for random_seed in range(10):
             test_resulst = evaluate_model(model, test_loader, evaluator, datasetName, datasetType='test')
             valid_result = evaluate_model(model, valid_loader, evaluator, datasetName, datasetType='valid')
             saveLog(f"Test results: {test_resulst}")
+            saveLog(f"Valid results: {valid_resulst}")
             test_results[tuple(h_dim)].append(test_resulst)
             valid_results[tuple(h_dim)].append(valid_result)
         
         #save test results in a file
         saveLog(f"Test results: {test_results}")
+        saveLog(f"Valid results: {valid_results}")
+        if args.random_seed != 11:
+            exit()
         
         #save average with std of test results in a file, and the range of the test results
         
@@ -233,11 +240,11 @@ for key, value in test_results.items():
     test_results_avg[key] = {}
     test_results_avg[key]['avg'] = np.mean(value)
     test_results_avg[key]['std'] = np.std(value)
-    saveLog(f"{key}: {test_results_avg[key]['avg']}±{test_results_avg[key]['std']}")
+    saveLog(f"test {key}: {test_results_avg[key]['avg']}±{test_results_avg[key]['std']}")
 for key, value in valid_results.items():
     valid_results_avg[key] = {}
     valid_results_avg[key]['avg'] = np.mean(value)
     valid_results_avg[key]['std'] = np.std(value)
-    saveLog(f"{key}: {valid_results_avg[key]['avg']}±{valid_results_avg[key]['std']}")
+    saveLog(f"valid {key}: {valid_results_avg[key]['avg']}±{valid_results_avg[key]['std']}")
 
         

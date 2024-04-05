@@ -47,15 +47,15 @@ Performance and number of parameters on ogbn-products:
 
 | Method | Params | Valid Accuracy | Test Accuracy |
 |---|---|---|---|
-| TCNN | xx | xx |xx |
-| DVCNN | xx | xx |xx |
+| TCNN | 22624 | 0.899089591±0.001062032 |0.760623083±0.003675053 |
+| DVCNN | 37039 | 0.872491926±0.001219387 |0.718366484±0.001702856 |
 
 Performance and number of parameters on ogbn-proteins:
 
 | Method | Params | Valid ROC-AUC | Test ROC-AUC |
 |---|---|---|---|
-| TCNN | xx | xx |xx |
-| DVCNN | xx | xx |xx |
+| TCNN | 22624 | 0.799306064±0.005573178 |0.759988705±0.018049045 |
+| DVCNN | 90608 | 0.825608641±0.005723252 |0.791618037±0.008599669 |
 
 ## Citing
 
