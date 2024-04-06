@@ -201,12 +201,14 @@ for X_file in X_file_List:
     
     # save test results in a dictionary
     test_results = {}
+    valid_results = {}
     
     for h_dim in hidden_dim:
         
         #if h_dim is not a key in test_results
         if not tuple(h_dim) in test_results.keys():
             test_results[tuple(h_dim)] = []
+            valid_results[tuple(h_dim)] = []
 
         
         model = denseNet(input_dim=x_shape, hidden_dim=h_dim,out_dim=y_shape,datasetName=datasetName).to(device)
@@ -218,19 +220,30 @@ for X_file in X_file_List:
         #load best model from f"{saveFolder}/best_model.pt"
         model.load_state_dict(torch.load(f"{saveFolder}/best_model.pt"))
         
-        test_resulst = evaluate_model(model, test_loader, evaluator, datasetName, datasetType='test')
-        saveLog(f"Test results: {test_resulst}")
-        test_results[tuple(h_dim)].append(test_resulst)
+        test_result = evaluate_model(model, test_loader, evaluator, datasetName, datasetType='test')
+        valid_result = evaluate_model(model, valid_loader, evaluator, datasetName, datasetType='valid')
+        saveLog(f"Test results: {test_result}")
+        saveLog(f"Valid results: {valid_result}")
+        test_results[tuple(h_dim)].append(test_result)
+        valid_results[tuple(h_dim)].append(valid_result)
+        
     
     #save test results in a file
     saveLog(f"Test results: {test_results}")
+    saveLog(f"Valid results: {valid_results}")
     
     #save average with std of test results in a file, and the range of the test results
     test_results_avg = {}
+    valid_results_avg = {}
     for key, value in test_results.items():
         test_results_avg[key] = {}
         test_results_avg[key]['avg'] = np.mean(value)
         test_results_avg[key]['std'] = np.std(value)
-        saveLog(f"{key}: {test_results_avg[key]['avg']}±{test_results_avg[key]['std']}")
+        saveLog(f"test {key}: {test_results_avg[key]['avg']}±{test_results_avg[key]['std']}")
+    for key, value in valid_results.items():
+        valid_results_avg[key] = {}
+        valid_results_avg[key]['avg'] = np.mean(value)
+        valid_results_avg[key]['std'] = np.std(value)
+        saveLog(f"valid {key}: {valid_results_avg[key]['avg']}±{valid_results_avg[key]['std']}")
 
     
